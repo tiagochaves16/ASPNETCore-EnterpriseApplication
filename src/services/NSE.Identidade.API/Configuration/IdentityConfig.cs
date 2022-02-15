@@ -11,7 +11,7 @@ namespace NSE.Identidade.API.Configuration
     public static class IdentityConfig
     {
         public static IServiceCollection AddIdentityConfiguration(this IServiceCollection services,
-         IConfiguration configuration)
+            IConfiguration configuration)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
@@ -28,4 +28,3 @@ namespace NSE.Identidade.API.Configuration
         }
     }
 }
-
