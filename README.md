@@ -15,6 +15,7 @@ A aplicação ASP .NET Core MVC | WebApi estará aderente às boas práticas e a
 * [C#](https://docs.microsoft.com/pt-br/dotnet/csharp/) - A linguagem de programação utilizada.
 * [.NET 3.1](https://dotnet.microsoft.com/download/dotnet/5.0) - Framework utilizado.
 * [Sql server](https://www.microsoft.com/pt-br/sql-server/sql-server-2019) - Banco de dados utilizado.
+* [RabbitMQ](https://www.rabbitmq.com/documentation.html) - RabbitMQ é um software open source de mensageria, que é utilizado para realizar comunicação assíncrona de dados e das aplicações.
 * [JWT](https://jwt.io/) - Ferramenta para blindar a aplicação com o objetivo de transmitir ou armazenar de forma compacta e segura.
 * [Swagger](https://swagger.io/) - Ferramenta que ajuda a testar e utilizar a Api.
 
