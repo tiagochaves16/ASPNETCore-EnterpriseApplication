@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NSE.Carrinho.API.Configuation;
+using NSE.Carrinho.API.Configuration;
 using NSE.WebAPI.Core.Identidade;
 
 
@@ -38,6 +39,8 @@ namespace NSE.Carrinho.API
             services.AddSwaggerConfiguration();
 
             services.RegisterServices();
+
+            services.AddMessageBusConfiguration(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

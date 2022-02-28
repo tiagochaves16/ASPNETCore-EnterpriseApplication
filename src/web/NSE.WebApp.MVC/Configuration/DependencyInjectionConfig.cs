@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.DataAnnotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NSE.WebAPI.Core.Usuario;
 using NSE.WebApp.MVC.Extensions;
 using NSE.WebApp.MVC.Services;
 using NSE.WebApp.MVC.Services.Handlers;
+using NSE.WebAPI.Core.Usuario;
 using Polly;
 using Polly.Extensions.Http;
 using Polly.Retry;
@@ -37,33 +37,29 @@ namespace NSE.WebApp.MVC.Configuration
                 .AddTransientHttpErrorPolicy(
                     p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
 
-            services.AddHttpClient<ICarrinhoService, CarrinhoService>()
+            services.AddHttpClient<IComprasBffService, ComprasBffService>()
+                .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
+                .AddPolicyHandler(PollyExtensions.EsperarTentar())
+                .AddTransientHttpErrorPolicy(
+                    p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
+
+            services.AddHttpClient<IClienteService, ClienteService>()
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
                 .AddPolicyHandler(PollyExtensions.EsperarTentar())
                 .AddTransientHttpErrorPolicy(
                     p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
 
             #endregion
-
-            #region Refit
-
-            //services.AddHttpClient("Refit",
-            //        options =>
-            //        {
-            //            options.BaseAddress = new Uri(configuration.GetSection("CatalogoUrl").Value);
-            //        })
-            //    .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
-            //    .AddTypedClient(Refit.RestService.For<ICatalogoServiceRefit>);
-
-            #endregion
         }
     }
 
-    public class PollyExtensions
+    #region PollyExtension
+
+    public static class PollyExtensions
     {
         public static AsyncRetryPolicy<HttpResponseMessage> EsperarTentar()
         {
-            var retry =  HttpPolicyExtensions
+            var retry = HttpPolicyExtensions
                 .HandleTransientHttpError()
                 .WaitAndRetryAsync(new[]
                 {
@@ -80,4 +76,6 @@ namespace NSE.WebApp.MVC.Configuration
             return retry;
         }
     }
+
+    #endregion
 }

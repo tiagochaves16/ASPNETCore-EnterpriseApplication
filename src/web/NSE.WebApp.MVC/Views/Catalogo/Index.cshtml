@@ -4,6 +4,7 @@
 @{
     ViewData["Title"] = "Todos os produtos";
 }
+
 <section>
     <div>
         <div style="background-image: url(images/banners/Template.jpg); height: 100%; background-position: center; background-repeat: no-repeat; background-size: cover">
@@ -14,7 +15,7 @@
         <div class="container" style=" padding-top: 20px">
             <div class="row">
                 @{
-                    foreach (var produto in Model.OrderBy(p=>p.Nome))
+                    foreach (var produto in Model.Where(p=>p.Ativo).OrderBy(p=>p.Nome))
                     {
                         <div class="col-md-3">
                             <div href="#" class="card card-product-grid">

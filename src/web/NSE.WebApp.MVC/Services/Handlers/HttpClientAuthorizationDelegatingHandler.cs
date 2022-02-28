@@ -4,7 +4,6 @@ using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 using NSE.WebAPI.Core.Usuario;
-using NSE.WebApp.MVC.Extensions;
 
 namespace NSE.WebApp.MVC.Services.Handlers
 {
